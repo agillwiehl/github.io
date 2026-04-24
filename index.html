@@ -116,6 +116,7 @@
     .hero-photos img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       filter: brightness(0.8) saturate(0.85); transition: filter 0.4s;
+      background: rgba(255,255,255,0.05);
     }
     .hero-photos img:hover { filter: brightness(1) saturate(1.1); }
     .hero-photos .tall { grid-row: span 2; }
@@ -146,7 +147,7 @@
     }
     .about-photo {
       width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
-      object-position: center top;
+      object-position: center top; min-height: 280px; background: var(--navy);
     }
     .about-card-info { background: var(--navy); padding: 24px 28px; }
     .about-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--gold-lt); margin-bottom: 6px; }
@@ -217,7 +218,7 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .method-row:hover { border-color: var(--gold); background: rgba(255,255,255,0.07); }
-    .method-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .method-icon { display: none; }
     .method-label {
       font-size: 0.88rem; color: rgba(255,255,255,0.75);
       font-weight: 500; line-height: 1.4;
@@ -226,12 +227,13 @@
 
     /* ── FIELDWORK PHOTO STRIP ── */
     #fieldwork { background: var(--navy); padding: 0; overflow: hidden; }
-    .photo-strip { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; height: 380px; }
+    .photo-strip { display: grid; grid-template-columns: 3fr 1.1fr 2fr 1.1fr; height: 420px; }
     .strip-photo { position: relative; overflow: hidden; }
     .strip-photo img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform 0.5s ease, filter 0.3s;
       filter: brightness(0.7) saturate(0.85);
+      background: var(--navy);
     }
     .strip-photo:hover img { transform: scale(1.05); filter: brightness(0.9) saturate(1.1); }
     .strip-caption {
@@ -251,7 +253,7 @@
       transition: border-color 0.3s, box-shadow 0.3s;
     }
     .research-card:hover { border-color: var(--gold); box-shadow: 0 4px 24px rgba(12,31,63,0.08); }
-    .research-icon { font-size: 1.8rem; margin-bottom: 20px; display: block; }
+    .research-icon { display: none; }
     .research-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--navy); margin-bottom: 12px; }
     .research-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
 
@@ -271,16 +273,6 @@
       font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
       padding: 4px 10px; background: var(--navy); color: var(--gold-lt);
       white-space: nowrap; align-self: center;
-    }
-    .pub-highlight { background: rgba(12,31,63,0.03); }
-    .pub-highlight .pub-title a {
-      color: var(--navy); text-decoration: none;
-      transition: color 0.2s;
-    }
-    .pub-highlight .pub-title a:hover { color: var(--accent); }
-    .pub-highlight .pub-title { font-size: 1rem; }
-    .pub-highlight .pub-tag {
-      background: var(--gold); color: var(--navy); font-weight: 500;
     }
     .pub-note {
       font-size: 0.85rem; color: var(--muted); margin-top: 32px;
@@ -392,9 +384,9 @@
     </div>
 
     <div class="hero-photos">
-      <img class="tall" src="lpg_group.png" alt="Research team with LPG cylinders at community distribution event">
-      <img src="WhatsApp_Image_2024-01-19_at_11_03_35.jpeg" alt="Lake Victoria shoreline with fishing boats">
-      <img src="cooking_fieldwork.png" alt="Researcher cooking on traditional stove during fieldwork">
+      <img class="tall" src="lpg_group.png" alt="Research team with LPG cylinders at community distribution event" style="object-position: center 20%;">
+      <img src="windmill.png" alt="Researcher with wind energy installation in the field" style="object-position: center 30%;">
+      <img src="WhatsApp_Image_2024-01-19_at_11_03_35.jpeg" alt="Lake Victoria shoreline with fishing boats" style="object-position: center 60%;">
     </div>
   </section>
 
@@ -405,7 +397,7 @@
     <div class="about-grid fade-in">
 
       <div class="about-card">
-        <img class="about-photo" src="headshot.png" alt="Principal Investigator">
+        <img class="about-photo" src="agw_headshot.png" alt="Annelise Gill-Wiehl" onerror="this.style.background='#1a3a6a';this.style.minHeight='300px'">
         <div class="about-card-info">
           <div class="about-name">Annelise Gill-Wiehl</div>
           <div class="about-title-card">
@@ -503,36 +495,31 @@
       </div>
       <div class="approach-methods">
         <div class="method-row">
-          <span class="method-icon">🔬</span>
-          <div>
+                    <div>
             <div class="method-label">Randomized &amp; quasi-experimental trials</div>
             <div class="method-sub">Causal evaluation of technology interventions</div>
           </div>
         </div>
         <div class="method-row">
-          <span class="method-icon">📋</span>
-          <div>
+                    <div>
             <div class="method-label">Field-based primary data collection</div>
             <div class="method-sub">Surveys, stove use monitoring, and personal exposure measurements</div>
           </div>
         </div>
         <div class="method-row">
-          <span class="method-icon">🗣️</span>
-          <div>
+                    <div>
             <div class="method-label">Ethnographic qualitative fieldwork</div>
             <div class="method-sub">In-depth interviews, focus groups, participant observation</div>
           </div>
         </div>
         <div class="method-row">
-          <span class="method-icon">🌍</span>
-          <div>
+                    <div>
             <div class="method-label">Emission reduction modeling</div>
             <div class="method-sub">National assessment of emission reductions from different policy pathways</div>
           </div>
         </div>
         <div class="method-row">
-          <span class="method-icon">📊</span>
-          <div>
+                    <div>
             <div class="method-label">Impact evaluation</div>
             <div class="method-sub">Robust methods for observational &amp; experimental data</div>
           </div>
@@ -545,19 +532,19 @@
   <div id="fieldwork">
     <div class="photo-strip">
       <div class="strip-photo">
-        <img src="research_team.jpeg" alt="REACH Lab research team with community members by Lake Victoria">
+        <img src="research_team.jpeg" alt="REACH Lab research team with community members by Lake Victoria" style="object-position: center 30%;">
         <div class="strip-caption">Research team, Lake Victoria region, Tanzania</div>
       </div>
       <div class="strip-photo">
-        <img src="bean-game__1_.jpeg" alt="Community focus group session">
-        <div class="strip-caption">Community focus group</div>
+        <img src="household_interview.png" alt="Household interview with community member" style="object-position: center 20%;">
+        <div class="strip-caption">Household interview, Tanzania</div>
       </div>
       <div class="strip-photo">
-        <img src="biomass_fuels.png" alt="Biomass fuel samples — firewood and charcoal">
-        <div class="strip-caption">Biomass fuel types: firewood &amp; charcoal</div>
+        <img src="lpg_focus_group.png" alt="Focus group with LPG stove demonstration" style="object-position: 40% 30%;">
+        <div class="strip-caption">LPG focus group session</div>
       </div>
       <div class="strip-photo">
-        <img src="lpg_cylinders.png" alt="LPG cylinders in a household">
+        <img src="lpg_cylinders.png" alt="LPG cylinders in a household" style="object-position: center center;">
         <div class="strip-caption">LPG cylinders, household participant</div>
       </div>
     </div>
@@ -569,34 +556,29 @@
     <h2>Research Areas</h2>
     <div class="research-grid fade-in">
       <div class="research-card">
-        <span class="research-icon">🏠</span>
-        <h3>Household Energy Transitions</h3>
+                <h3>Household Energy Transitions</h3>
         <p>We study the adoption and sustained use of cleaner cooking technologies — LPG,
           and electric cooking — in low- and middle-income countries,
         with a focus on what makes interventions affordable.</p>
       </div>
       <div class="research-card">
-        <span class="research-icon">🌫️</span>
-        <h3>Air Quality &amp; Exposure</h3>
+                <h3>Air Quality &amp; Exposure</h3>
         <p>Using field measurements, we characterize indoor and outdoor air pollutant exposures — especially in communities
         that bear disproportionate pollution burdens.</p>
       </div>
       <div class="research-card">
-        <span class="research-icon">⚡</span>
-        <h3>Energy &amp; Climate</h3>
+                <h3>Energy &amp; Climate</h3>
         <p>Energy transitions affect greenhouse gas emissions, short-lived climate pollutants,
         and regional climate feedbacks. We model these relationships to quantify the
         climate co-benefits of clean cooking and energy access programs and policy.</p>
       </div>
       <div class="research-card">
-        <span class="research-icon">📐</span>
-        <h3>Impact Evaluation Methods</h3>
+                <h3>Impact Evaluation Methods</h3>
         <p>We apply rigorous experimental and quasi-experimental methods
         to evaluate the real-world effectiveness of environmental interventions.</p>
       </div>
       <div class="research-card">
-        <span class="research-icon">⚖️</span>
-        <h3>Gender equality and social dynamics</h3>
+                <h3>Gender equality and social dynamics</h3>
         <p> Women are the primary cooks in many households across LMICs. They bear the brunt of the financial and health burden of polluting fuels. 
           We study how women are affected by energy access interventions and how such interventions may lessen their work, rather than add to it. 
        </p>
@@ -608,110 +590,94 @@
   <section id="publications">
     <div class="section-label">Selected Works</div>
     <h2>Publications</h2>
-    <div class="pub-list fade-in">
+        <div class="pub-list fade-in">
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1038/s41560-025-01778-w" target="_blank">
-              Deconstructing the (un)affordability of clean cooking fuels through a randomized trial in rural Tanzania
-            </a>
-          </div>
-          <div class="pub-meta">Gill-Wiehl, A., Ray, I., Katikiro, R., Kammen, D.M., &amp; Hubbard, A. · <em>Nature Energy</em>, 10, 836–846</div>
+        <div class="pub-header">
+          <span class="pub-year">2026</span>
+          <span class="pub-tag">Nat. Sustainability</span>
         </div>
-        <span class="pub-tag">Nature Energy</span>
+        <div class="pub-title">
+          <a href="https://www.nature.com/articles/s41893-026-01769-z" target="_blank">The roles of women in cookstove intervention studies</a>
+        </div>
+        <div class="pub-meta">Gill-Wiehl, A. et al. &middot; <em>Nature Sustainability</em></div>
       </div>
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://iopscience.iop.org/article/10.1088/1748-9326/add7ed/meta" target="_blank">
-              'I am the one responsible': the gendered reality of clean cooking fuel affordability in Shirati, Tanzania
-            </a>
-          </div>
-          <div class="pub-meta">Gill-Wiehl, A. &amp; Ray, I. · <em>Environmental Research Letters</em></div>
+        <div class="pub-header">
+          <span class="pub-year">2025</span>
+          <span class="pub-tag">Nature Energy</span>
         </div>
-        <span class="pub-tag">ERL</span>
+        <div class="pub-title">
+          <a href="https://doi.org/10.1038/s41560-025-01778-w" target="_blank">Deconstructing the (un)affordability of clean cooking fuels through a randomized trial in rural Tanzania</a>
+        </div>
+        <div class="pub-meta">Gill-Wiehl, A., Ray, I., Katikiro, R., Kammen, D.M., &amp; Hubbard, A. &middot; <em>Nature Energy</em>, 10, 836&ndash;846</div>
       </div>
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://www.sciencedirect.com/science/article/pii/S2214109X25005273" target="_blank">
-              Beyond access: clean energy use in low-income and middle-income countries
-            </a>
-          </div>
-          <div class="pub-meta">Gould, C.F.*, Gill-Wiehl, A.*, Pillarisetti, A., Kwong, L.H., Kammen, D.M., &amp; Clasen, T. · <em>The Lancet Global Health</em> (*co-first authors)</div>
+        <div class="pub-header">
+          <span class="pub-year">2025</span>
+          <span class="pub-tag">ERL</span>
         </div>
-        <span class="pub-tag">Lancet</span>
+        <div class="pub-title">
+          <a href="https://iopscience.iop.org/article/10.1088/1748-9326/add7ed/meta" target="_blank">'I am the one responsible': the gendered reality of clean cooking fuel affordability in Shirati, Tanzania</a>
+        </div>
+        <div class="pub-meta">Gill-Wiehl, A. &amp; Ray, I. &middot; <em>Environmental Research Letters</em></div>
       </div>
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2024</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1038/s41893-023-01259-6" target="_blank">
-              Pervasive over-crediting from cookstove offset methodologies
-            </a>
-          </div>
-          <div class="pub-meta">Gill-Wiehl, A., Kammen, D.M., &amp; Haya, B.K. · <em>Nature Sustainability</em>, 7, 191–202</div>
+        <div class="pub-header">
+          <span class="pub-year">2025</span>
+          <span class="pub-tag">Lancet</span>
         </div>
-        <span class="pub-tag">Nat. Sustainability</span>
+        <div class="pub-title">
+          <a href="https://www.sciencedirect.com/science/article/pii/S2214109X25005273" target="_blank">Beyond access: clean energy use in low-income and middle-income countries</a>
+        </div>
+        <div class="pub-meta">Gould, C.F.*, Gill-Wiehl, A.*, Pillarisetti, A., Kwong, L.H., Kammen, D.M., &amp; Clasen, T. &middot; <em>The Lancet Global Health</em> (*co-first authors)</div>
       </div>
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2026</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://www.nature.com/articles/s41893-026-01769-z" target="_blank">
-              The roles of women in cookstove intervention studies
-            </a>
-          </div>
-          <div class="pub-meta">Gill-Wiehl, A. et al. · <em>Nature Sustainability</em></div>
+        <div class="pub-header">
+          <span class="pub-year">2024</span>
+          <span class="pub-tag">Nat. Sustainability</span>
         </div>
-        <span class="pub-tag">Nat. Sustainability</span>
+        <div class="pub-title">
+          <a href="https://doi.org/10.1038/s41893-023-01259-6" target="_blank">Pervasive over-crediting from cookstove offset methodologies</a>
+        </div>
+        <div class="pub-meta">Gill-Wiehl, A., Kammen, D.M., &amp; Haya, B.K. &middot; <em>Nature Sustainability</em>, 7, 191&ndash;202</div>
       </div>
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2024</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://www.sciencedirect.com/science/article/abs/pii/S245229292500058X" target="_blank">
-              Experimental and ethnographic evidence on household-based lockboxes and savings nudges from rural Tanzania
-            </a>
-          </div>
-          <div class="pub-meta">Gill-Wiehl, A. et al. · <em>World Development Perspectives</em>, 39</div>
+        <div class="pub-header">
+          <span class="pub-year">2024</span>
+          <span class="pub-tag">World Dev. Persp.</span>
         </div>
-        <span class="pub-tag">World Dev. Persp.</span>
+        <div class="pub-title">
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S245229292500058X" target="_blank">Experimental and ethnographic evidence on household-based lockboxes and savings nudges from rural Tanzania</a>
+        </div>
+        <div class="pub-meta">Gill-Wiehl, A. et al. &middot; <em>World Development Perspectives</em>, 39</div>
       </div>
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2022</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1016/j.enpol.2022.112915" target="_blank">
-              The need to prioritize consumption: a difference-in-differences approach to analyze the total effect of India's below-the-poverty-line policies on LPG use
-            </a>
-          </div>
-          <div class="pub-meta">Gill-Wiehl, A., Brown, T., &amp; Smith, K. · <em>Energy Policy</em>, 164, 112915</div>
+        <div class="pub-header">
+          <span class="pub-year">2022</span>
+          <span class="pub-tag">Energy Policy</span>
         </div>
-        <span class="pub-tag">Energy Policy</span>
+        <div class="pub-title">
+          <a href="https://doi.org/10.1016/j.enpol.2022.112915" target="_blank">The need to prioritize consumption: a difference-in-differences approach to analyze the total effect of India's below-the-poverty-line policies on LPG use</a>
+        </div>
+        <div class="pub-meta">Gill-Wiehl, A., Brown, T., &amp; Smith, K. &middot; <em>Energy Policy</em>, 164, 112915</div>
       </div>
 
       <div class="pub-item pub-highlight">
-        <div class="pub-year">2021</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1016/j.rser.2021.111537" target="_blank">
-              Is clean cooking affordable? A review
-            </a>
-          </div>
-          <div class="pub-meta">Gill-Wiehl, A., Ray, I., &amp; Kammen, D.M. · <em>Renewable &amp; Sustainable Energy Reviews</em>, 151, 111537</div>
+        <div class="pub-header">
+          <span class="pub-year">2021</span>
+          <span class="pub-tag">RSER</span>
         </div>
-        <span class="pub-tag">RSER</span>
+        <div class="pub-title">
+          <a href="https://doi.org/10.1016/j.rser.2021.111537" target="_blank">Is clean cooking affordable? A review</a>
+        </div>
+        <div class="pub-meta">Gill-Wiehl, A., Ray, I., &amp; Kammen, D.M. &middot; <em>Renewable &amp; Sustainable Energy Reviews</em>, 151, 111537</div>
       </div>
 
     </div>
@@ -732,7 +698,7 @@
         and collaborators with interests in clean energy, air quality, and global health.
         Feel free to reach out about current projects or opportunities in the lab.</p>
         <div class="contact-detail">
-          <div class="contact-detail-icon">📍</div>
+          <div class="contact-detail-icon"></div>
           <div class="contact-detail-text">
             <strong>Office</strong>
             [Building Name &amp; Room Number]<br>
@@ -740,14 +706,14 @@
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">✉️</div>
+          <div class="contact-detail-icon"></div>
           <div class="contact-detail-text">
             <strong>Email</strong>
             <a href="mailto:yournetid@nd.edu">[yournetid]@nd.edu</a>
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">🔗</div>
+          <div class="contact-detail-icon"></div>
           <div class="contact-detail-text">
             <strong>Profiles</strong>
             <a href="#">Google Scholar</a> &nbsp;·&nbsp;
