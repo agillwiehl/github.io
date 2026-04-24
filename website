@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REACH Lab — University of Notre Dame</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0C1F3F;
+      --gold:   #C99700;
+      --gold-lt:#F0C840;
+      --cream:  #FAF8F3;
+      --stone:  #E8E4DB;
+      --text:   #1A1A2E;
+      --muted:  #5A6070;
+      --accent: #2E6DAD;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(12,31,63,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,151,0,0.25);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      color: var(--gold-lt); font-size: 1.25rem;
+      letter-spacing: 0.06em; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; background: var(--navy);
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 120px 80px 80px;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; top: -180px; right: -180px;
+      width: 700px; height: 700px; border-radius: 50%;
+      border: 1px solid rgba(201,151,0,0.08); pointer-events: none;
+    }
+    #hero::after {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px; border-radius: 50%;
+      border: 1px solid rgba(201,151,0,0.13); pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-label {
+      font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-label::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--gold); }
+    .hero-acronym {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1.1; color: var(--gold-lt); margin-bottom: 32px;
+    }
+    .hero-mission {
+      color: rgba(255,255,255,0.85); max-width: 500px;
+      font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;
+      font-style: italic;
+      border-left: 2px solid var(--gold);
+      padding-left: 20px;
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.5); max-width: 480px;
+      font-size: 0.95rem; line-height: 1.8; margin-bottom: 44px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--navy);
+      padding: 14px 28px; font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .hero-cta-ghost {
+      display: inline-flex;
+      border: 1px solid rgba(201,151,0,0.4); color: rgba(255,255,255,0.7);
+      padding: 14px 28px; font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+      margin-left: 16px; transition: border-color 0.2s, color 0.2s;
+    }
+    .hero-cta-ghost:hover { border-color: var(--gold); color: var(--gold-lt); }
+    .hero-photos {
+      padding-left: 60px; position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 230px 230px; gap: 8px;
+    }
+    .hero-photos img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.8) saturate(0.85); transition: filter 0.4s;
+    }
+    .hero-photos img:hover { filter: brightness(1) saturate(1.1); }
+    .hero-photos .tall { grid-row: span 2; }
+
+    /* ── SECTION SHELL ── */
+    section { padding: 100px 80px; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--gold); }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--navy); margin-bottom: 48px; line-height: 1.2;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 320px 1fr; gap: 72px; align-items: start; }
+
+    .about-card { position: relative; }
+    .about-card::after {
+      content: ''; position: absolute; bottom: -6px; right: -6px;
+      width: 100%; height: calc(100% - 0px); border: 1px solid var(--gold); pointer-events: none;
+      top: 0;
+    }
+    .about-photo {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+      object-position: center top;
+    }
+    .about-card-info { background: var(--navy); padding: 24px 28px; }
+    .about-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--gold-lt); margin-bottom: 6px; }
+    .about-title-card { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    .about-body { display: flex; flex-direction: column; gap: 0; }
+
+    /* Mission callout */
+    .mission-block {
+      background: var(--navy);
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .mission-block::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--gold);
+    }
+    .mission-label {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .mission-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem; color: #fff;
+      line-height: 1.7; font-style: italic;
+    }
+
+    .about-body p { margin-bottom: 20px; color: var(--muted); line-height: 1.85; }
+    .about-body p:first-of-type { font-size: 1.05rem; color: var(--text); }
+
+    /* Expertise pills */
+    .expertise-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-top: 28px;
+    }
+    .expertise-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--stone);
+      transition: border-color 0.2s;
+    }
+    .expertise-item:hover { border-color: var(--gold); }
+    .expertise-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0; margin-top: 7px;
+    }
+    .expertise-text { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .expertise-text strong { display: block; color: var(--navy); font-size: 0.8rem; margin-bottom: 2px; font-weight: 500; }
+
+    /* Approach section — dark band */
+    #approach {
+      background: var(--navy); padding: 80px;
+    }
+    #approach h2 { color: #fff; margin-bottom: 40px; }
+    #approach .section-label { color: var(--gold); }
+    .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .approach-text { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.9; }
+    .approach-text p { margin-bottom: 20px; }
+    .approach-text strong { color: var(--gold-lt); font-weight: 500; }
+    .approach-methods { display: flex; flex-direction: column; gap: 12px; }
+    .method-row {
+      display: flex; align-items: center; gap: 20px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.04);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .method-row:hover { border-color: var(--gold); background: rgba(255,255,255,0.07); }
+    .method-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .method-label {
+      font-size: 0.88rem; color: rgba(255,255,255,0.75);
+      font-weight: 500; line-height: 1.4;
+    }
+    .method-sub { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+    /* ── FIELDWORK PHOTO STRIP ── */
+    #fieldwork { background: var(--navy); padding: 0; overflow: hidden; }
+    .photo-strip { display: grid; grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr; height: 380px; }
+    .strip-photo { position: relative; overflow: hidden; }
+    .strip-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s ease, filter 0.3s;
+      filter: brightness(0.7) saturate(0.85);
+    }
+    .strip-photo:hover img { transform: scale(1.05); filter: brightness(0.9) saturate(1.1); }
+    .strip-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 40px 18px 16px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      font-size: 0.71rem; color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em; font-style: italic;
+    }
+
+    /* ── RESEARCH ── */
+    #research { background: var(--stone); }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .research-card {
+      background: #fff; padding: 40px 32px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .research-card:hover { border-color: var(--gold); box-shadow: 0 4px 24px rgba(12,31,63,0.08); }
+    .research-icon { font-size: 1.8rem; margin-bottom: 20px; display: block; }
+    .research-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--navy); margin-bottom: 12px; }
+    .research-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--cream); }
+    .pub-list { display: flex; flex-direction: column; }
+    .pub-item {
+      display: grid; grid-template-columns: 48px 1fr auto;
+      gap: 24px; align-items: start;
+      padding: 32px 0; border-bottom: 1px solid rgba(12,31,63,0.1);
+    }
+    .pub-item:first-child { border-top: 1px solid rgba(12,31,63,0.1); }
+    .pub-year { font-family: 'DM Serif Display', serif; font-size: 0.9rem; color: var(--gold); padding-top: 3px; }
+    .pub-title { font-size: 0.95rem; color: var(--navy); font-weight: 500; margin-bottom: 6px; line-height: 1.5; }
+    .pub-meta { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+    .pub-tag {
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; background: var(--navy); color: var(--gold-lt);
+      white-space: nowrap; align-self: center;
+    }
+    .pub-highlight { background: rgba(12,31,63,0.03); }
+    .pub-highlight .pub-title a {
+      color: var(--navy); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pub-highlight .pub-title a:hover { color: var(--accent); }
+    .pub-highlight .pub-title { font-size: 1rem; }
+    .pub-highlight .pub-tag {
+      background: var(--gold); color: var(--navy); font-weight: 500;
+    }
+    .pub-note {
+      font-size: 0.85rem; color: var(--muted); margin-top: 32px;
+      padding: 20px 24px; border-left: 2px solid var(--gold);
+      background: rgba(12,31,63,0.03);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); }
+    #contact h2 { color: #fff; }
+    #contact .section-label { color: var(--gold); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-block p { color: rgba(255,255,255,0.5); line-height: 1.85; margin-bottom: 36px; }
+    .contact-detail { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
+    .contact-detail-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+    }
+    .contact-detail-text { font-size: 0.9rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+    .contact-detail-text strong { color: var(--gold); display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; font-weight: 500; }
+    .contact-detail-text a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .contact-detail-text a:hover { color: var(--gold-lt); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 14px 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form textarea { min-height: 140px; resize: vertical; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .btn-submit {
+      align-self: flex-start; background: var(--gold); color: var(--navy);
+      border: none; padding: 14px 32px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-submit:hover { background: var(--gold-lt); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070f1f; padding: 36px 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(201,151,0,0.15);
+    }
+    .footer-logo { font-family: 'DM Serif Display', serif; color: var(--gold-lt); font-size: 1rem; letter-spacing: 0.08em; }
+    .footer-meta { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+    .footer-nd { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+    .footer-nd span { color: rgba(201,151,0,0.7); }
+
+    /* ── FADE-IN ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      #hero { grid-template-columns: 1fr; padding: 100px 32px 60px; }
+      .hero-photos { padding-left: 0; margin-top: 48px; grid-template-rows: 180px 180px; }
+      section, #approach { padding: 72px 32px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-card { max-width: 320px; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .research-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .photo-strip { grid-template-columns: 1fr 1fr; height: auto; }
+      .strip-photo { height: 200px; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 24px; }
+      .nav-links { gap: 18px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">REACH Lab</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <div class="hero-label">University of Notre Dame · Environmental Engineering</div>
+      <div class="hero-acronym">REACH Lab</div>
+      <p class="hero-mission">
+        Increasing the effectiveness, adoption, and affordability of engineering technology
+        in low- and middle-income countries to avert health and climate impacts.
+      </p>
+      <p class="hero-sub">
+        Research on Energy, Air quality, Climate &amp; Health — combining rigorous quantitative methods
+        with deep ethnographic fieldwork across East Africa and beyond.
+      </p>
+      <a href="#about" class="hero-cta">Meet the Lab</a>
+      <a href="#contact" class="hero-cta-ghost">Get in Touch</a>
+    </div>
+
+    <div class="hero-photos">
+      <img class="tall" src="lpg_group.png" alt="Research team with LPG cylinders at community distribution event">
+      <img src="WhatsApp_Image_2024-01-19_at_11_03_35.jpeg" alt="Lake Victoria shoreline with fishing boats">
+      <img src="cooking_fieldwork.png" alt="Researcher cooking on traditional stove during fieldwork">
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Principal Investigator</div>
+    <h2>About</h2>
+    <div class="about-grid fade-in">
+
+      <div class="about-card">
+        <img class="about-photo" src="headshot.png" alt="Principal Investigator">
+        <div class="about-card-info">
+          <div class="about-name">Annelise Gill-Wiehl</div>
+          <div class="about-title-card">
+            Assistant Professor<br>
+            Civil &amp; Environmental Engineering &amp; Earth Sciences<br>
+            University of Notre Dame
+          </div>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <div class="mission-block">
+          <div class="mission-label">Mission</div>
+          <div class="mission-text">
+            Increasing the effectiveness, adoption, and affordability of technology
+            in low- and middle-income countries to avert health and climate impacts.
+          </div>
+        </div>
+
+        <p>
+          I am an Assistant Professor of Environmental Engineering at the University of Notre Dame,
+          where I lead the REACH Lab. My research sits at the intersection of energy access,
+          air quality, and human health — with a focus on the billions of people who rely on
+          solid biomass fuels for cooking and heating.
+        </p>
+        <p>
+          What distinguishes our approach is the pairing of <strong style="color:var(--text);font-weight:500;">robust quantitative methods</strong> from
+          biostatistics and impact evaluation with <strong style="color:var(--text);font-weight:500;">deep ethnographic qualitative work</strong>.
+          I have conducted extensive fieldwork in East Africa, living and working alongside
+          communities to understand how and why households make energy choices — and designing and testing
+          interventions to increase their effectiveness, adoption, and affordability.
+        </p>
+        <p>
+          Before joining Notre Dame, I was a postdoctoral researcher at Columbia University in Environmental Health Sciences. 
+          I received by MS and PhD in Energy & Resources from UC Berkeley. I went to Notre Dame for my undergraduate degree 
+          in Environmental Engineering. When I'm not working on energy access, I enjoy long distance running, walking my dog, Barkeley, 
+          and hiking with my family.
+        </p>
+
+        <div class="expertise-grid">
+          <div class="expertise-item">
+            <div class="expertise-dot"></div>
+            <div class="expertise-text">
+              <strong>Experimental &amp; Quasi-Experimental Design</strong>
+              Randomized trials and natural experiments to evaluate interventions
+            </div>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-dot"></div>
+            <div class="expertise-text">
+              <strong>Observational Study Design</strong>
+              Understanding drivers of energy choice and adoption and modeling the health and climate impacts of interventions
+            </div>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-dot"></div>
+            <div class="expertise-text">
+              <strong>Field-Based Primary Data Collection</strong>
+              Household surveys, stove use monitoring, and personal exposure measurement in LMICs
+            </div>
+          </div>
+          <div class="expertise-item">
+            <div class="expertise-dot"></div>
+            <div class="expertise-text">
+              <strong>Qualitative Fieldwork</strong>
+              In-depth interviews, focus groups, and ethnographic methods
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH BAND -->
+  <section id="approach">
+    <div class="section-label">How We Work</div>
+    <h2>Interdisciplinary Approach</h2>
+    <div class="approach-grid fade-in">
+      <div class="approach-text">
+        <p>
+          Understanding how to transition people to clean energy technologies requires
+          more than engineering analysis alone. Our work bridges disciplines: we bring
+          <strong>biostatistics and impact evaluation</strong> to bear on rigorous causal questions,
+          while grounding our work in <strong>deep ethnographic understanding</strong> of the
+          communities we work with.
+        </p>
+        <p>
+          This means spending real time in the field — piloting surveys, sitting in homes conducting interviews and focus groups, talking with charcoal and gas sellers,
+          talking with community members, and collecting personal exposure measurements. 
+        </p>
+        <p>
+          Our fieldwork is largely based in East Africa (Tanzania and Kenya), but we also have projects working on affordability across the continent, 
+          and we model the health and climate impacts of interventions at regional and global scales.
+        </p>
+      </div>
+      <div class="approach-methods">
+        <div class="method-row">
+          <span class="method-icon">🔬</span>
+          <div>
+            <div class="method-label">Randomized &amp; quasi-experimental trials</div>
+            <div class="method-sub">Causal evaluation of technology interventions</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <span class="method-icon">📋</span>
+          <div>
+            <div class="method-label">Field-based primary data collection</div>
+            <div class="method-sub">Surveys, stove use monitoring, and personal exposure measurements</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <span class="method-icon">🗣️</span>
+          <div>
+            <div class="method-label">Ethnographic qualitative fieldwork</div>
+            <div class="method-sub">In-depth interviews, focus groups, participant observation</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <span class="method-icon">🌍</span>
+          <div>
+            <div class="method-label">Emission reduction modeling</div>
+            <div class="method-sub">National assessment of emission reductions from different policy pathways</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <span class="method-icon">📊</span>
+          <div>
+            <div class="method-label">Impact evaluation</div>
+            <div class="method-sub">Robust methods for observational &amp; experimental data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELDWORK PHOTO STRIP -->
+  <div id="fieldwork">
+    <div class="photo-strip">
+      <div class="strip-photo">
+        <img src="research_team.jpeg" alt="REACH Lab research team with community members by Lake Victoria">
+        <div class="strip-caption">Research team, Lake Victoria region, Tanzania</div>
+      </div>
+      <div class="strip-photo">
+        <img src="bean-game__1_.jpeg" alt="Community focus group session">
+        <div class="strip-caption">Community focus group</div>
+      </div>
+      <div class="strip-photo">
+        <img src="biomass_fuels.png" alt="Biomass fuel samples — firewood and charcoal">
+        <div class="strip-caption">Biomass fuel types: firewood &amp; charcoal</div>
+      </div>
+      <div class="strip-photo">
+        <img src="lpg_cylinders.png" alt="LPG cylinders in a household">
+        <div class="strip-caption">LPG cylinders, household participant</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-label">What We Do</div>
+    <h2>Research Areas</h2>
+    <div class="research-grid fade-in">
+      <div class="research-card">
+        <span class="research-icon">🏠</span>
+        <h3>Household Energy Transitions</h3>
+        <p>We study the adoption and sustained use of cleaner cooking technologies — LPG,
+          and electric cooking — in low- and middle-income countries,
+        with a focus on what makes interventions affordable.</p>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">🌫️</span>
+        <h3>Air Quality &amp; Exposure</h3>
+        <p>Using field measurements, we characterize indoor and outdoor air pollutant exposures — especially in communities
+        that bear disproportionate pollution burdens.</p>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">⚡</span>
+        <h3>Energy &amp; Climate</h3>
+        <p>Energy transitions affect greenhouse gas emissions, short-lived climate pollutants,
+        and regional climate feedbacks. We model these relationships to quantify the
+        climate co-benefits of clean cooking and energy access programs and policy.</p>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">📐</span>
+        <h3>Impact Evaluation Methods</h3>
+        <p>We apply rigorous experimental and quasi-experimental methods
+        to evaluate the real-world effectiveness of environmental interventions.</p>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">⚖️</span>
+        <h3>Gender equality and social dynamics</h3>
+        <p> Women are the primary cooks in many households across LMICs. They bear the brunt of the financial and health burden of polluting fuels. 
+          We study how women are affected by energy access interventions and how such interventions may lessen their work, rather than add to it. 
+       </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-label">Selected Works</div>
+    <h2>Publications</h2>
+    <div class="pub-list fade-in">
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1038/s41560-025-01778-w" target="_blank">
+              Deconstructing the (un)affordability of clean cooking fuels through a randomized trial in rural Tanzania
+            </a>
+          </div>
+          <div class="pub-meta">Gill-Wiehl, A., Ray, I., Katikiro, R., Kammen, D.M., &amp; Hubbard, A. · <em>Nature Energy</em>, 10, 836–846</div>
+        </div>
+        <span class="pub-tag">Nature Energy</span>
+      </div>
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://iopscience.iop.org/article/10.1088/1748-9326/add7ed/meta" target="_blank">
+              'I am the one responsible': the gendered reality of clean cooking fuel affordability in Shirati, Tanzania
+            </a>
+          </div>
+          <div class="pub-meta">Gill-Wiehl, A. &amp; Ray, I. · <em>Environmental Research Letters</em></div>
+        </div>
+        <span class="pub-tag">ERL</span>
+      </div>
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://www.sciencedirect.com/science/article/pii/S2214109X25005273" target="_blank">
+              Beyond access: clean energy use in low-income and middle-income countries
+            </a>
+          </div>
+          <div class="pub-meta">Gould, C.F.*, Gill-Wiehl, A.*, Pillarisetti, A., Kwong, L.H., Kammen, D.M., &amp; Clasen, T. · <em>The Lancet Global Health</em> (*co-first authors)</div>
+        </div>
+        <span class="pub-tag">Lancet</span>
+      </div>
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1038/s41893-023-01259-6" target="_blank">
+              Pervasive over-crediting from cookstove offset methodologies
+            </a>
+          </div>
+          <div class="pub-meta">Gill-Wiehl, A., Kammen, D.M., &amp; Haya, B.K. · <em>Nature Sustainability</em>, 7, 191–202</div>
+        </div>
+        <span class="pub-tag">Nat. Sustainability</span>
+      </div>
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://www.nature.com/articles/s41893-026-01769-z" target="_blank">
+              The roles of women in cookstove intervention studies
+            </a>
+          </div>
+          <div class="pub-meta">Gill-Wiehl, A. et al. · <em>Nature Sustainability</em></div>
+        </div>
+        <span class="pub-tag">Nat. Sustainability</span>
+      </div>
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S245229292500058X" target="_blank">
+              Experimental and ethnographic evidence on household-based lockboxes and savings nudges from rural Tanzania
+            </a>
+          </div>
+          <div class="pub-meta">Gill-Wiehl, A. et al. · <em>World Development Perspectives</em>, 39</div>
+        </div>
+        <span class="pub-tag">World Dev. Persp.</span>
+      </div>
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1016/j.enpol.2022.112915" target="_blank">
+              The need to prioritize consumption: a difference-in-differences approach to analyze the total effect of India's below-the-poverty-line policies on LPG use
+            </a>
+          </div>
+          <div class="pub-meta">Gill-Wiehl, A., Brown, T., &amp; Smith, K. · <em>Energy Policy</em>, 164, 112915</div>
+        </div>
+        <span class="pub-tag">Energy Policy</span>
+      </div>
+
+      <div class="pub-item pub-highlight">
+        <div class="pub-year">2021</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1016/j.rser.2021.111537" target="_blank">
+              Is clean cooking affordable? A review
+            </a>
+          </div>
+          <div class="pub-meta">Gill-Wiehl, A., Ray, I., &amp; Kammen, D.M. · <em>Renewable &amp; Sustainable Energy Reviews</em>, 151, 111537</div>
+        </div>
+        <span class="pub-tag">RSER</span>
+      </div>
+
+    </div>
+    <p class="pub-note">
+      For a complete list, see my
+      <a href="https://scholar.google.com/citations?user=qzi-xVoAAAAJ&hl=en" target="_blank" style="color:var(--navy);font-weight:500;">Google Scholar</a>
+      or <a href="https://orcid.org" target="_blank" style="color:var(--navy);font-weight:500;">ORCID</a> profile.
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Get In Touch</div>
+    <h2>Contact</h2>
+    <div class="contact-grid fade-in">
+      <div class="contact-block">
+        <p>I welcome inquiries from prospective graduate students, postdoctoral researchers,
+        and collaborators with interests in clean energy, air quality, and global health.
+        Feel free to reach out about current projects or opportunities in the lab.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div class="contact-detail-text">
+            <strong>Office</strong>
+            [Building Name &amp; Room Number]<br>
+            University of Notre Dame, Notre Dame, IN 46556
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            <a href="mailto:yournetid@nd.edu">[yournetid]@nd.edu</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🔗</div>
+          <div class="contact-detail-text">
+            <strong>Profiles</strong>
+            <a href="#">Google Scholar</a> &nbsp;·&nbsp;
+            <a href="#">ORCID</a> &nbsp;·&nbsp;
+            <a href="#">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Your email" required>
+        </div>
+        <input type="text" placeholder="Subject">
+        <textarea placeholder="Your message"></textarea>
+        <button class="btn-submit" type="submit">Send Message →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">REACH Lab</div>
+    <div class="footer-meta">Research on Energy, Air quality, Climate &amp; Health</div>
+    <div class="footer-nd"><span>University of Notre Dame</span> · Environmental Engineering</div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#1a4a2e';
+      btn.style.color = '#fff';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
