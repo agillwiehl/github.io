@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annelise Gill-Wiehl · ETHICA Lab</title>
+<meta name="description" content="Annelise Gill-Wiehl, Assistant Professor of Environmental Engineering at the University of Notre Dame.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --ink: #1d2126;
+    --muted: #6b6f75;
+    --rule: #e6e2da;
+    --accent: #1f3a5f;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 16px/1.7 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+  a:hover { border-color: currentColor; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(251,250,247,.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .mark { font: 500 15px var(--serif); letter-spacing: .02em; color: var(--ink); }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 28px; }
+  nav ul a { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  nav ul a:hover { color: var(--ink); border-color: transparent; }
+
+  /* Hero */
+  header { padding: 112px 0 88px; }
+  .hero { display: grid; grid-template-columns: 1fr 168px; gap: 48px; align-items: center; }
+  h1 {
+    font: 300 clamp(40px, 6vw, 56px)/1.1 var(--serif);
+    letter-spacing: -.01em; margin: 0 0 12px;
+  }
+  .role { font-size: 14px; color: var(--muted); margin: 0 0 32px; letter-spacing: .02em; }
+  .lede { font: 300 21px/1.55 var(--serif); margin: 0; max-width: 34em; }
+  .lab { font-size: 13px; color: var(--muted); letter-spacing: .02em; margin: 28px 0 0; }
+  .lab strong { font-weight: 500; color: var(--accent); letter-spacing: .12em; }
+  .photo {
+    width: 168px; height: 168px; border-radius: 50%;
+    object-fit: cover; background: var(--rule);
+  }
+
+  /* Sections */
+  section { padding: 72px 0; border-top: 1px solid var(--rule); }
+  h2 {
+    font: 500 12px var(--sans); letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 36px;
+  }
+  h3 { font: 400 22px/1.3 var(--serif); margin: 0 0 6px; }
+  p { margin: 0 0 16px; }
+  .muted { color: var(--muted); }
+
+  .themes { display: grid; gap: 36px; }
+  .theme { display: grid; grid-template-columns: 40px 1fr; }
+  .num { font: 300 22px var(--serif); color: var(--accent); }
+  .theme p { margin: 0; color: var(--muted); }
+
+  .projects { list-style: none; margin: 0; padding: 0; }
+  .projects li {
+    display: flex; justify-content: space-between; gap: 24px;
+    padding: 16px 0; border-bottom: 1px solid var(--rule);
+  }
+  .projects li:first-child { border-top: 1px solid var(--rule); }
+  .projects span:last-child { color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+  .links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+  .links a { font-size: 15px; }
+
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    nav ul { gap: 16px; }
+    nav ul li.opt { display: none; }
+    header { padding: 64px 0 56px; }
+    .hero { grid-template-columns: 1fr; gap: 28px; }
+    .photo { width: 120px; height: 120px; order: -1; }
+    .lede { font-size: 19px; }
+    .projects li { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="mark">ETHICA Lab</span>
+    <ul>
+      <li><a href="#research">Research</a></li>
+      <li class="opt"><a href="#projects">Projects</a></li>
+      <li><a href="#join">Join</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <div>
+      <h1>Annelise Gill-Wiehl</h1>
+      <p class="role">Assistant Professor of Environmental Engineering · University of Notre Dame</p>
+      <p class="lede">We study how household environmental technologies perform in the real world, and how to make sure they deliver the health and climate benefits they promise.</p>
+      <p class="lab"><strong>ETHICA</strong> · Evaluating Technologies for Health Impacts, Climate, and Affordability</p>
+    </div>
+    <img class="photo" src="AGW_headshot_82426.jpg" alt="Annelise Gill-Wiehl">
+  </div>
+</header>
+
+<section id="research">
+  <div class="wrap">
+    <h2>Research</h2>
+    <div class="themes">
+      <div class="theme">
+        <span class="num">i</span>
+        <div>
+          <h3>Emissions &amp; exposures</h3>
+          <p>Measuring emissions and what people breathe.</p>
+        </div>
+      </div>
+      <div class="theme">
+        <span class="num">ii</span>
+        <div>
+          <h3>Field studies</h3>
+          <p>Randomized trials to test how to increase adoption and sustained use, and how that use shapes health and well-being.</p>
+        </div>
+      </div>
+      <div class="theme">
+        <span class="num">iii</span>
+        <div>
+          <h3>Modeling at scale</h3>
+          <p>Analyzing what households can afford, modeling the health and climate benefits at scale, and planning the energy systems needed to get there.</p>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:40px">The burdens these technologies aim to reduce fall hardest on women and marginalized communities. <em>Ethica</em>, Latin for ethics, reflects our commitment to ethical research that translates into tangible impact for them.</p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Questions We're Asking</h2>
+    <ul class="projects">
+      <li><span>How do households reach exclusive use of clean cooking fuels?</span><span>Tanzania</span></li>
+      <li><span>What can households actually afford, and what does that mean for consistent use?</span><span>Sub-Saharan Africa</span></li>
+      <li><span>What will it take for central and decentralized grids to support electric cooking?</span><span>Global</span></li>
+      <li><span>How high are residential exposures, and how do we reduce them?</span><span>Global</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <h2>Join the Lab</h2>
+    <p>I am recruiting PhD students interested in household energy, air quality, energy systems, and/or field research. Please reach out with a short note about your interests and a CV.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="links">
+      <a href="mailto:agillwie@nd.edu">Email</a>
+      <a href="https://scholar.google.com/citations?user=qzi-xVoAAAAJ&hl=en">Google Scholar</a>
+      <a href="AGW_CV_9_20_26.docx">CV</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Department of Civil &amp; Environmental Engineering and Earth Sciences · University of Notre Dame</div>
+</footer>
+
+</body>
+</html>
